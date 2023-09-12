@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amsmath}
+\setlength{\parindent}{0pt}
+\usepackage[papersize={8.5in,11in},margin=0.5in]{geometry} 
+
+\title{CS 522 Assignment 1}
+\author{John Caruthers}
+
+\begin{document}
+\maketitle
+
+\begin{itemize}
+    \item[1.] You are approached by the marketing director of a local company, who believes that he has devised a foolproof way to measure customer satisfaction.  He explains his scheme as follows: "It's so simple that I can't believe that no one has thought of it before.  I just keep track of the number of customer complaints for each product.  I read in a data mining book that counts are ratio attributes, and so, my measure of product satisfaction must be a ratio attribute.  But when I rated the products based on my new customer satisfaction measure and showed them to my boss, he told me that I had overlooked the obvious, and that my measure was worthless.  I think that he was just mad because our best selling product had the worst satisfaction since it had the most complaints.  Could you help me set him straight?"
+    \begin{itemize}
+        \item[(a)] Who is right, the marketing director or his boss?  If you answered, his boss, what would you do to fix the measure of satisfaction?
+        \textbf{The boss is correct.  I would set the customer satisfaction to a ratio equal to the number of complaints of a particular item divided by the total number of that particular item sold. This would normalize the data based off of the specific items sold.  It would reflect a more accurate product satisfaction ratio. }
+        \item[(b)] What can you say about the attribute type of the original product satisfaction attribute?
+        \textbf{The original product satisfaction attribute is ratio since it contains order, distinctness, interval and a zero value is meaningful.  For example, zero complaints about a product means the customer satisfaction was 100\% with that particular product.}
+    \end{itemize}
+
+    \item[2.] For the following vectors, \textbf{x} and \textbf{y}, calculate the indicated similarity or distance measures. Equations for each are below:\\
+        \begin{align}
+            \text{Cosine(\textbf{x},\textbf{y})}=\cos(\textbf{x},\textbf{y})&=\frac{\langle \textbf{x},\textbf{y}\rangle}{||\textbf{x}|| \text{ } ||\textbf{y}||}\nonumber\\
+            \langle \textbf{x},\textbf{y}\rangle&=\sum_{k=1}^n x_ky_k\nonumber\\
+            ||\textbf{x}||&=\sqrt{\sum_{k=1}^n x_k^2}\text{ , }\hspace{0.1cm}||\textbf{y}||=\sqrt{\sum_{k=1}^n y_k^2}\nonumber\\
+            \text{Correlation(\textbf{x},\textbf{y})}=corr(\textbf{x},\textbf{y})&=\frac{s_{xy}}{s_xs_y}\nonumber\\
+            s_{xy}&=\frac{1}{n-1}\sum_{k=1}^n (x_k-\bar{x})(y_k-\bar{y})\nonumber\\
+            s_x&=\sqrt{\frac{1}{n-1}\sum_{k=1}^n (x_k-\bar{x})^2}\text{ , }\hspace{0.1cm}s_y=\sqrt{\frac{1}{n-1}\sum_{k=1}^n (y_k-\bar{y})^2}\nonumber\\
+            \bar{x}&=\frac{1}{n}\sum_{k=1}^n x_k\text{ , }\hspace{0.1cm}\bar{y}=\frac{1}{n}\sum_{k=1}^n y_k\nonumber\\
+            \text{Euclidean(\textbf{x},\textbf{y})}=d(\textbf{x},\textbf{y})&=\sqrt{\sum_{k=1}^n (x_k-y_k)^2}\nonumber
+        \end{align}
+    \begin{itemize}
+        \item[(a)] $\textbf{x}=(1,1,1,1), \textbf{y}=(2,2,2,2)$: Cosine, Correlation, Euclidean
+        \begin{align}
+            \cos(\textbf{x},\textbf{y})&=\frac{(1*2)+(1*2)+(1*2)+(1*2)}{\sqrt{1^2+1^2+1^2+1^2}*\sqrt{2^2+2^2+2^2+2^2}}=\frac{2+2+2+2}{\sqrt{4}*\sqrt{16}}=\frac{8}{2*4}=1\nonumber\\
+            corr(\textbf{x},\textbf{y})&=\frac{s_{xy}}{s_xs_y}\nonumber\\
+            s_{xy}&=\frac{1}{4-1}\Big[(1-1)*(2-2)+(1-1)*(2-2)+(1-1)*(2-2)+(1-1)*(2-2)\Big]=0\nonumber\\
+            s_x&=\sqrt{\frac{1}{4-1} [(1-1)^2+(1-1)^2+(1-1)^2+(1-1)^2]}=\sqrt{0}\nonumber\\
+            s_y&=\sqrt{\frac{1}{4-1}[(2-2)^2+(2-2)^2+(2-2)^2+(2-2)^2]}=\sqrt{0}\nonumber\\
+            corr(\textbf{x},\textbf{y})&=\frac{0}{\sqrt{0}*\sqrt{0}}=NaN\nonumber\\
+            d(\textbf{x},\textbf{y})&=\sqrt{(1-2)^2+(1-2)^2+(1-2)^2+(1-2)^2}=\sqrt{1+1+1+1}=2\nonumber
+        \end{align}
+        \item[(c)] $\textbf{x}=(0,-1,0,1), \textbf{y}=(1,0,-1,0)$: Cosine, Correlation, Euclidean
+        \begin{align}
+            \cos(\textbf{x},\textbf{y})&=\frac{(0*1)+((-1)*0)+(0*(-1))+(1*0)}{\sqrt{0^2+(-1)^2+0^2+1^2}*\sqrt{1^2+0^2+(-1)^2+0^2}}=\frac{0+0+0+0}{\sqrt{2}*\sqrt{2}} = 0\nonumber\\
+            corr(\textbf{x},\textbf{y})&=\frac{s_{xy}}{s_xs_y}\nonumber\\
+            s_{xy}&=\frac{1}{4-1}\Big[(0-0)*(1-0)+((-1)-0)*(0-0)+(0-0)*((-1)-0)+(1-0)*(0-0)\Big]=0\nonumber\\
+            s_x&=\sqrt{\frac{1}{4-1} [(0-0)^2+((-1)-0)^2+(0-0)^2+(1-0)^2]}=\sqrt{\frac{2}{3}}\nonumber\\
+            s_y&=\sqrt{\frac{1}{4-1}[(1-0)^2+(0-0)^2+((-1)-0)^2+(0-0)^2]}=\sqrt{\frac{2}{3}}\nonumber\\
+            corr(\textbf{x},\textbf{y})&=\frac{0}{\sqrt{\frac{2}{3}}*\sqrt{\frac{2}{3}}}=0\nonumber\\
+            d(\textbf{x},\textbf{y})&=\sqrt{(0-1)^2+((-1)-0)^2+(0-(-1))^2+(1-0)^2}=\sqrt{1+1+1+1}=2\nonumber
+        \end{align}
+        \item[(e)] $\textbf{x}=(2,-1,0,2,0,-3), \textbf{y}=(-1,1,-1,0,0,-1)$: Cosine, Correlation
+        \begin{align}
+            \cos(\textbf{x},\textbf{y})&=\frac{(2*(-1))+((-1)*1)+(0*(-1))+(2*0)+(0*0)+((-3)*(-1))}{\sqrt{2^2+(-1^2)+0^2+2^2+0^2+(-3)^2}*\sqrt{(-1)^2+1^2+(-1)^2+0^2+0^2+(-1)^2}}\nonumber\\
+            &=\frac{(-2)-1+0+0+0+3}{\sqrt{4+1+0+4+0+9}*\sqrt{1+1+1+0+0+1}}=\frac{0}{\sqrt{18}*\sqrt{4}}=0\nonumber\\
+            corr(\textbf{x},\textbf{y})&=\frac{s_{xy}}{s_xs_y}\nonumber\\
+            s_{xy}&=\frac{1}{6-1}\Bigg[\Big(2-0\Big)*\Big(-1+\frac{1}{3}\Big)+\Big(-1-0\Big)*\Big(1+\frac{1}{3}\Big)+\Big(2-0\Big)*\Big(0+\frac{1}{3}\Big)+\Big(-3-0\Big)*\Big(-1+\frac{1}{3}\Big)\Bigg]\nonumber\\
+            &=\frac{1}{5}\Bigg[2*\Big(-\frac{2}{3}\Big)+\Big(-1\Big)*\Big(\frac{4}{3}\Big)+2*\Big(\frac{1}{3}\Big)+\Big(-3\Big)*\Big(-\frac{2}{3}\Big)\Bigg]\nonumber\\
+            &=\frac{1}{5}\Bigg[-\frac{8}{3}+\frac{2}{3}+\frac{6}{3}\Bigg]=0\nonumber\\
+            s_x&=\sqrt{\frac{1}{6-1}\Bigg[(2-0)^2+(-1-0)^2+(2-0)^2+(3-0)^2\Bigg]}=\sqrt{\frac{18}{5}}\nonumber\\
+            s_y&=\sqrt{\frac{1}{6-1}\Bigg[\Big(-1+\frac{1}{3}\Big)^2+\Big(1+\frac{1}{3}\Big)^2+\Big(-1+\frac{1}{3}\Big)^2+\Big(-\frac{1}{3}\Big)^2+\Big(-\frac{1}{3}\Big)+\Big(-1+\frac{1}{3}\Big)^2\Bigg]}=\sqrt{\frac{6}{9}}\nonumber\\
+            corr(\textbf{x},\textbf{y})&=\frac{0}{\sqrt{\frac{18}{5}}*\sqrt{\frac{6}{9}}}=0\nonumber
+        \end{align}
+    \end{itemize}
+    \item[3.] State the type of each attribute (nominal, ordinal, interval, or ratio) given below before and after we have performed the following transformation.
+    \begin{itemize}
+        \item[(a)] Hair color of a person is mapped to the following values: black =0, brown = 1, red = 2, blonde = 3, grey = 4, white = 5. \textbf{Nominal before, nominal after transformation}        
+        \item[(b)] Grade of a student (from 0 to 100) is mapped to the following scale: $A = 4.0, A- = 3.5, B = 3.0, B- = 2.5, C = 2.0, C- = 1.5, D = 1.0,D- = 0.5, E = 0.0$ \textbf{Ordinal before, and ordinal after transformation.}
+        \item[(c)] Height of a person is changed from meters to feet. \textbf{Ratio before and ratio after transformation.}
+    \end{itemize}
+    \item[4.] Null values in data records may refer to missing or inapplicable values. Consider the following table of employees for a hypothetical organization:
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Name & Sales & Commission/Occupation \\
+            \hline
+            John & 5000 & Sales \\
+            \hline
+            Mary & 1000 & Sales \\
+            \hline
+            Bob & null & Non-sales \\
+            \hline
+            Lisa & null & Non-sales \\
+            \hline
+        \end{tabular}
+    \end{center}
+    The null values in the table refer to inapplicable values since sales commission are calculated for sales employees only. Suppose we are interested to calculate the similarity between users based on their sales commission.
+    \begin{itemize}
+        \item[(a)] Explain what is the limitation of the approach to compute similarity if we replace the null values in sales commission by 0.
+        \textbf{Since sales commission is only calculated for sales employees, \emph{null} values represent missing data.  Setting the missing data to \$0 is one way of handling missing data, but can incur bias in the data.  This would bias the data to show that non-sales personnel have no contribution to sales and the similarity between non sales and the top sales would be minimum for the data set(or 0 for similarity).}
+        \item[(b)] Explain what is the limitation of the approach to compute similarity if we replace the null values in sales commission by the average value of sales commission (i.e., 3000).
+        \textbf{Setting the \emph{null} value to \$3000, or the average of the data set is another way to transform the null values into useful data.  Setting \emph{null} values to the average will help reduce the bias in the data but add fake sales into the data set.  The sum of all the sales would be higher than the actual sales of the organization. This may be better if gross sales is not really measured or important for the analysis.}
+        \item[(c)] Propose a method that can handle null values in the sales commission so that employees that have the same occupation are closer to each other than to employees that have different occupations. Removing rows are not acceptable here. 
+        \textbf{Some methods to handle missing data are to eliminate the data objects or attributes, estimate missing values and ignore the value during analysis. I would binarize the occupation data so that sales is one and non-sales is zero, as seen below.}
+        \begin{center}
+            \begin{tabular}{|c|c|c|c|}
+            \hline
+            Name & Sales & Commission/Occupation & OccupationBinary\\
+            \hline
+            John & 5000 & Sales & 1 \\
+            \hline
+            Mary & 1000 & Sales & 1 \\
+            \hline
+            Bob & null & Non-sales & 0\\
+            \hline
+            Lisa & null & Non-sales & 0\\
+            \hline
+            \end{tabular}
+        \end{center}
+        \textbf{The algorithm would only essentially ignore the non-sales occupations and only compare the similarity of the employees working in sales. Next, the sales would be normalize to the total sales of that occupation type.  Non-sales data would be transformed to zero (if null) and only have similarity calculated if "OccupationBianary" is zero. }
+    \end{itemize}
+\end{itemize}
+
+\end{document}
